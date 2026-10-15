@@ -1,0 +1,29 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: Build and test
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build_test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v4
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Run project one tests
+      run: dotnet test TestProject1/TestProject1.csproj --no-build --verbosity normal
+    - name: Run project two tests
+      run: dotnet test TestProject2/TestProject2.csproj --no-build --verbosity normal
+    - name: Run project tree tests
+      run: dotnet test TestProject3/TestProject3.csproj --no-build --verbosity normal
