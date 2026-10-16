@@ -1,6 +1,6 @@
 pipeline{
     agent any
-
+/// Adding the stages for the pipeline
     stages{
         stage("Checkout the code"){
             steps{
